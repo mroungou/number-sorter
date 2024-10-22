@@ -4,7 +4,11 @@ const sortInputArray = (event) => {
     event.preventDefault();
 
     const inputValues = [...document.getElementsByClassName('values-dropdown')].map(dropdown => Number(dropdown.value))
-    const sortedValues = bubbleSort(inputValues)
+    // const sortedValues = bubbleSort(inputValues)
+    // const sortedValues = selectionSort(inputValues)
+    const sortedValues = inputValues.sort((a, b) => {
+        
+    })
     updateUI(sortedValues)
 }
 
@@ -35,7 +39,42 @@ const bubbleSort = (array) => {
 }
 
 const selectionSort = (array) => {
-    
+
+    for (let i = 0; i < array.length; i++) {
+        // minIndex tracks the index of the smallest value
+        // if the smallest value is at the index it swaps it with itself and doesn't move
+        let minIndex = i
+
+        for (let j = i + 1; j < array.length; j++) {
+            // console.log(array, array[j], array[minIndex])
+            if (array[j] < array[minIndex]) {
+                minIndex = j
+            }
+        }
+
+        const temp = array[i] /* stores the value of the current value @ i */
+        array[i] = array[minIndex] /* swapping the value at i with the smallest one */
+        array[minIndex] = temp /* swapping the value that was at the index where the smaller value 
+        was found with the value of the larger value that was found at i*/
+    }
+
+    return array
+}
+
+const insertionSort = (array) => {
+    for (let i = 1; i < array.length; i++){
+       const currValue = array[i]
+       let j = i - 1
+
+       while (j >= 0 && array[j] > currValue) {
+        array[j + 1] = array[j] // assigning the bigger value which is array[j] to the next index
+        j--
+       }
+
+       array[j + 1] = currValue
+    }
+
+    return array;
 }
 
 sortButton.addEventListener('click', sortInputArray)
