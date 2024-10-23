@@ -7,7 +7,7 @@ const sortInputArray = (event) => {
     // const sortedValues = bubbleSort(inputValues)
     // const sortedValues = selectionSort(inputValues)
     const sortedValues = inputValues.sort((a, b) => {
-        
+        return a - b
     })
     updateUI(sortedValues)
 }
@@ -62,18 +62,25 @@ const selectionSort = (array) => {
 }
 
 const insertionSort = (array) => {
-    for (let i = 1; i < array.length; i++){
-       const currValue = array[i]
-       let j = i - 1
+    for (let i = 1; i < array.length; i++) {
+        const currValue = array[i]
+        // j is the index to left of i i.e. before i [0,1,2,3] i would be 1 and j would be 0
+        let j = i - 1
 
        while (j >= 0 && array[j] > currValue) {
-        array[j + 1] = array[j] // assigning the bigger value which is array[j] to the next index
+        /* on each iteration of this while loop we're finding an element that is larger
+        than currValue. i want to move that element to right to make room for currValue
+        therefore, i am assigning the value at the next index to be the value currently 
+        at array[j] */
+
+        /* j + 1 is just i???? */
+        /* if the  */
+        array[j + 1] = array[j]
         j--
        }
-
+       /* because currentValue > array[j] i want to move currentValue to the right */
        array[j + 1] = currValue
     }
-
     return array;
 }
 
